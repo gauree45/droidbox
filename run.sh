@@ -7,7 +7,7 @@ echo -e "\e[1;32;40mDroidbox Docker starting\nWaiting for the emulator to startu
 mkdir -p /samples/out
 /sbin/ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}' > /samples/out/ip.txt
 sleep 1
-/opt/android-sdk-linux/tools/emulator64-arm @droidbox -no-window -no-audio -system /opt/DroidBox_4.1.1/images/system.img -ramdisk /opt/DroidBox_4.1.1/images/ramdisk.img  >> /samples/out/emulator.log &
+/opt/android-sdk-linux/tools/emulator64-arm @droidbox -no-window -no-audio -system /opt/DroidBox_4.1.1/images/system.img -ramdisk /opt/DroidBox_4.1.1/images/ramdisk.img  -tcpdump /samples/out/emu1.pcap >> /samples/out/emulator.log &
 sleep 1
 service ssh start
 adb wait-for-device 
