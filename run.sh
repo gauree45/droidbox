@@ -14,6 +14,6 @@ adb wait-for-device
 adb forward tcp:5900 tcp:5901
 adb shell /data/fastdroid-vnc >> /samples/out/vnc.log &
 echo -ne "\e[0m"
-python /opt/DroidBox_4.1.1/scripts/droidbox.py $1 $2 2>&1 |tee /samples/out/analysis.log
+python /opt/DroidBox_4.1.1/scripts/droidbox.py $1 $2 2>&1 |tee /samples/out/analysis_$1_`date`.log
 echo -ne "\e[0m"
 exit
