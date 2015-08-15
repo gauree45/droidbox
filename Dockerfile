@@ -43,6 +43,7 @@ RUN sed  's/PermitRootLogin without-password/PermitRootLogin yes/g' /etc/ssh/ssh
 #RUN /build/install-fastdroid-vnc.sh
 ADD run.sh /build/
 ADD droidbox.py.patch /build/
+#Remove the patch command for the droidbox script
 #RUN cd /opt/DroidDocker/scripts && patch < /build/droidbox.py.patch
 
 CMD ["NONE"]
