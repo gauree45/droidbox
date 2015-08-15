@@ -4,7 +4,7 @@ if [ "$1" = "NONE" ]; then
     exit 1
 fi
 echo -e "\e[1;32;40mDroidbox Docker starting\nWaiting for the emulator to startup..."
-mkdir -p /samples/out
+mkdir -p /samples/out/$3
 /sbin/ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | awk '{ print $1}' > /samples/out/$3/ip.txt
 sleep 1
 /opt/android-sdk-linux/tools/emulator64-arm @droidbox -no-window -no-audio -system /opt/DroidBox_4.1.1/images/system.img -ramdisk /opt/DroidBox_4.1.1/images/ramdisk.img  -tcpdump /samples/out/emu1.pcap >> /samples/out/$3/emulator.log &
