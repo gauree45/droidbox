@@ -12,14 +12,20 @@ sleep 1
 service ssh start
 adb wait-for-device 
 adb forward tcp:5900 tcp:5901
-OUT=`adb shell getprop init.svc.bootanim`
-RES="stopped"
- 
-while [[ ${OUT:0:7}  != 'stopped' ]]; do
-		OUT=`adb shell getprop init.svc.bootanim`
-		echo 'Waiting for emulator to fully boot...'
-		sleep 1
-done
+bootcomplete = None
+count = 0
+    while bootcomplete is not 1:
+        p = Popen(['adb', '-s', emulator, 'wait-for-device', 'shell', 'getprop', 'sys.boot_completed'], stdout=PIPE)
+        out=p.communicate()
+        try:
+            bootcomplete = int(str(out[0]).strip())
+        except:
+            pass
+        sleep(2)
+        count+=1
+        if count % 10 is 0:
+            print "Waiting boot completed... ", bootcomplete
+
  
 echo "Emulator booted!"
 #adb shell /data/fastdroid-vnc >> /samples/out/$3/vnc.log &
