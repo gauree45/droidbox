@@ -13,11 +13,10 @@ service ssh start
 adb wait-for-device 
 adb forward tcp:5900 tcp:5901
 
- 
-echo "Emulator booted!"
 #adb shell /data/fastdroid-vnc >> /samples/out/$3/vnc.log &
 echo -ne "\e[0m"
 adb get-state
+echo "python command"
 python /opt/DroidDocker/scripts/droidbox.py $1 $2 2>&1 |tee /samples/out/$3/analysis.log
 echo -ne "\e[0m"
 exit
